@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mixcastr</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/fonts/font.css" rel="stylesheet">
+    <link href="/mediaelement/mediaelementplayer.css" rel="stylesheet" />
+    
+    <!-- Move this shit into a css file -->
+    <style type="text/css">
+      body {
+        padding-top: 60px; 
+      }
+      .mejs-container {
+        float:right;
+        margin-top:5px;
+        visibility:hidden;
+      }
+    </style>
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+    <!-- Le jQuery and les scripts-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script src="/mediaelement/mediaelement-and-player.min.js"></script>
+    <script src="http://connect.soundcloud.com/2/latest.min.js" type="text/javascript"></script>
+    <script>
+      $(document).ready(function() {
+      SC.initialize({
+        client_id: "3c3aecf09c9a6e46e721f6118612ca59",
+      });
+      
+      SC.get("/users/28428/tracks", function(trackData){
+        console.log(trackData);
+        for (i=0;i<=49;i++) {
+          if (trackData[i].artwork_url != null) {
+            var artwork = trackData[i].artwork_url
+          }
+          var alttag = trackData[i].title
+          var streamurl = trackData[i].stream_url
+          var client_id = "3c3aecf09c9a6e46e721f6118612ca59"
+          var description = trackData[i].description
+          if (artwork != null && streamurl != null) {
+            $('.media-grid').append('<li><a href="#" data-url="' + streamurl + '" onclick="swapPlayer(\'' + encodeURIComponent(streamurl) + '\')"><img class="thumbnail" src="' + artwork + '" alt="' + alttag + '" data-content="' + description + '"></a></li>');
+          }
+          var artwork = null
+        }
+      });
+
+        $('.playnow').click(function (){
+          $('.hero-unit').fadeOut('slow',function() {
+            $('.hero-tracks').fadeIn('slow');
+            $('.mejs-container').css('visibility','visible').hide().fadeIn('slow');
+          });
+        });
+
+        
+      });
+
+      function firePlayer() {
+        var player = $('audio').mediaelementplayer({
+          audioWidth: 350
+        })
+       
+      };
+
+      function swapPlayer(url) {
+          $('.mejs-container').remove();
+          $('.nav').after('<audio id="player" src="' + decodeURIComponent(url) + '?client_id=3c3aecf09c9a6e46e721f6118612ca59" type="audio/mp3" controls="controls">');
+          firePlayer();
+          $('.mejs-container').css('visibility','visible');
+        }
+
+      
+
+    </script>
+  </head>
+
+  <body>
+
+    <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <a class="brand molot" href="#">Mixcastr</a>
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about" class="about">About</a></li>
+          </ul>
+            
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>An experiment</h1>
+        <p><strong>Mixcastr</strong> is an experiment in music discovery by mashing up music service APIs, and a database of content from <strong>salacioussound.com</strong>.</p>
+        <p><a class="btn primary large playnow">Play Now &raquo;</a></p>
+      </div>
+
+      <div class="hero-tracks" style="display:none;">
+        <ul class="media-grid">
+          
+        </ul>
+      </div>
+
+      <div class="output">
+        
+      </div>
+
+      <footer>
+        <p><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p>
+      </footer>
+
+    </div> <!-- /container -->
+
+     
+  </body>
+</html>
