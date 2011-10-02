@@ -1,11 +1,22 @@
 require 'sinatra'
 require 'soundcloud'
+# require 'datamapper'
+
+# DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/users.db")
+
+# class User
+#    include DataMapper::Resource
+#    property :id, Serial
+#    property :email, String
+#    property :name, String
+#    property :created_at, DateTime
+# end
+
+# User.auto_migrate! unless User.storage_exists?
+
+# MAIN TRACK APP
 
 get '/' do
-	# register a client with YOUR_CLIENT_ID as client_id_
-	# client = Soundcloud.new(:client_id => '3c3aecf09c9a6e46e721f6118612ca59')
-	# get 10 hottest tracks
-	# @tracks = client.get('/users/28428/tracks')
 	@query = params[:q]
 	if @query.nil?
 		erb :index
@@ -13,6 +24,17 @@ get '/' do
 		erb :tracks
 	end
 end
+
+# AUTH TEST
+
+get '/auth' do
+	erb :auth
+end
+
+# get '/users' do
+#	@users = User.get(:order => [:id.desc ])
+#	erb :users
+# end
 
 get '/less' do
 	erb :less
