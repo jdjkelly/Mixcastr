@@ -21,10 +21,19 @@
       body {
         padding-top: 60px; 
       }
-      .mejs-container {
+      #player {
         float:right;
         margin-top:5px;
-        visibility:hidden;
+        margin-right:35px;
+      }
+      .nowPlayer {
+        float:right;
+      }
+      .playing {
+        border-color: #0069d6 !important;
+        -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
+        -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
+        box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
       }
     </style>
 
@@ -53,36 +62,34 @@
                 }
         });
 
-      SC.initialize({
-        client_id: "3c3aecf09c9a6e46e721f6118612ca59",
-      });
-      
-      SC.get("/users/28428/tracks", function(trackData){
-        console.log(trackData);
-        for (i=0;i<=49;i++) {
-          if (trackData[i].artwork_url != null) {
-            var artwork = trackData[i].artwork_url
-          }
-          var alttag = trackData[i].title
-          var streamurl = trackData[i].stream_url
-          var client_id = "3c3aecf09c9a6e46e721f6118612ca59"
-          var description = trackData[i].description
-          if (artwork != null && streamurl != null) {
-            $('.media-grid').append('<li><a href="#" data-url="' + streamurl + '" onclick="swapPlayer(\'' + encodeURIComponent(streamurl) + '\')"><img class="thumbnail" src="' + artwork + '" alt="' + alttag + '" data-content="' + description + '"></a></li>');
-          }
-          var artwork = null
-        }
-      });
-
-        $('.playnow').click(function (){
-          $('.hero-unit').fadeOut('slow',function() {
-            $('.hero-tracks').fadeIn('slow');
-            $('.mejs-container').css('visibility','visible').hide().fadeIn('slow');
-          });
+        SC.initialize({
+          client_id: "3c3aecf09c9a6e46e721f6118612ca59",
         });
-
+        
+        SC.get("/tracks?client_id=3c3aecf09c9a6e46e721f6118612ca59&filter=streamable&order=hotness&q=<%= @query %>", function(trackData){
+          console.log(trackData);
+          for (i=0;i<=49;i++) {
+            if (trackData[i].artwork_url != null) {
+              var artwork = trackData[i].artwork_url
+            }
+            var alttag = trackData[i].title
+            var streamurl = trackData[i].stream_url
+            var client_id = "3c3aecf09c9a6e46e721f6118612ca59"
+            var description = trackData[i].description
+            var title = trackData[i].title
+            if (artwork != null && streamurl != null) {
+              $('.media-grid').append('<li><a class="test" href="#" data-url="' + streamurl + '" onclick="swapPlayer(\'' + encodeURIComponent(streamurl) + '\',\'' + escape(title) + '\')"><img class="thumbnail" src="' + artwork + '"></a></li>');
+            }
+            var artwork = null
+          }
+        });
         
       });
+
+      $('.media-grid a').live('click', function(){
+        $('.media-grid a').removeClass('playing');
+        $(this).addClass('playing');
+      })
 
       function firePlayer() {
         var player = $('audio').mediaelementplayer({
@@ -91,11 +98,13 @@
        
       };
 
-      function swapPlayer(url) {
-          $('.mejs-container').remove();
-          $('.nav').after('<audio id="player" src="' + decodeURIComponent(url) + '?client_id=3c3aecf09c9a6e46e721f6118612ca59" type="audio/mp3" controls="controls">');
-          firePlayer();
-          $('.mejs-container').css('visibility','visible');
+      function swapPlayer(url,title) {
+
+          $('#player, .nowPlaying').remove();
+          $('.nav').append('<li class="active nowPlaying"><a href="#">' + unescape(title) + '</a></li>');
+          $('.nav').before('<audio id="player" src="' + decodeURIComponent(url) + '?client_id=3c3aecf09c9a6e46e721f6118612ca59" type="audio/mp3" preload="auto" controls="controls">');
+          var audio_file1 = document.getElementById('player');
+audio_file1.play();       
         }
 
       
@@ -109,9 +118,8 @@
       <div class="fill">
         <div class="container">
           <a class="brand molot" href="#">Mixcastr</a>
-          <ul class="nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about" class="about">About</a></li>
+          <ul class="nav" style="float:right;">
+            
           </ul>
             
         </div>
@@ -120,26 +128,15 @@
 
     <div class="container">
 
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <div class="hero-unit">
-        <h1>An experiment</h1>
-        <p><strong>Mixcastr</strong> is an experiment in music discovery by mashing up music service APIs, and a database of content from <strong>salacioussound.com</strong>.</p>
-        <p><form><input class="xlarge" id="search" name="q" size="30" type="text" value="what do you like to dance to?">
-        <input type="submit" class="btn primary" value="Engage Dance Mode &raquo;"></form></p>
-      </div>
 
-      <div class="hero-tracks" style="display:none;">
+      <div class="hero-tracks">
         <ul class="media-grid">
           
         </ul>
       </div>
 
-      <div class="output">
-        
-      </div>
-
       <footer>
-        <p><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a></p>
+        <p><a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License, Version 2.0</a> and <a href="#">Github Compat.</p>
       </footer>
 
     </div> <!-- /container -->

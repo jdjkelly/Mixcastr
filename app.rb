@@ -6,7 +6,13 @@ get '/' do
 	# client = Soundcloud.new(:client_id => '3c3aecf09c9a6e46e721f6118612ca59')
 	# get 10 hottest tracks
 	# @tracks = client.get('/users/28428/tracks')
-	erb :index
+	@query = params[:q]
+	if @query.nil?
+		erb :index
+	else
+		erb :tracks
+	end
+
 end
 
 get '/less' do
