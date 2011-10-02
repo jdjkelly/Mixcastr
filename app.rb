@@ -12,7 +12,6 @@ get '/' do
 	else
 		erb :tracks
 	end
-
 end
 
 get '/less' do
