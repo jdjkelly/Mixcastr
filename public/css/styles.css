@@ -1,5 +1,9 @@
 #map {
-	margin-top:-20px; 
+	margin-top:-20px;
+}
+
+.map {
+	position:fixed;
 }
 
 .hero-tracks {
