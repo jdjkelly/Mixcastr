@@ -1,8 +1,8 @@
 <script type="text/javascript">
   SC.connectForm({
     size:         "m",                 // size of the button (s, m, l)
-    client_id:    "YOUR_CLIENT_ID",
-    redirect_uri: "http://localhost:3000/soundcloud-callback.html",
+    client_id:    "3c3aecf09c9a6e46e721f6118612ca59",
+    redirect_uri: "http://localhost:4567/soundcloud-callback.html",
     connected: function(){
       SC.get("/me", function(me){
         alert("Hello " + me.username);

@@ -14,28 +14,9 @@
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/fonts/font.css" rel="stylesheet">
-    <link href="/mediaelement/mediaelementplayer.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="http://stratus.heroku.com/css/stratus.css"/>
     
-    <!-- Move this shit into a css file -->
-    <style type="text/css">
-      body {
-        padding-top: 60px; 
-      }
-      #player {
-        float:right;
-        margin-top:5px;
-        margin-right:35px;
-      }
-      .nowPlayer {
-        float:right;
-      }
-      .playing {
-        border-color: #0069d6 !important;
-        -webkit-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
-        -moz-box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
-        box-shadow: 0 1px 4px rgba(0, 105, 214, 0.25) !important;
-      }
-    </style>
 
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="images/favicon.ico">
@@ -45,10 +26,17 @@
 
     <!-- Le jQuery and les scripts-->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
-        <script src="/mediaelement/mediaelement-and-player.min.js"></script>
     <script src="http://connect.soundcloud.com/2/latest.min.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-twipsy.js" type="text/javascript"></script>
+    <script src="/js/bootstrap-popover.js" type="text/javascript"></script>
+    
+    
+    <script type="text/javascript" src="http://stratus.heroku.com/js/jquery-ui-1.8.6.custom.min.js"></script>
+    <script type="text/javascript" src="http://stratus.heroku.com/js/soundcloud.player.api.js"></script>
+    <script type="text/javascript" src="http://stratus.heroku.com/js/stratus.js"></script>
     <script>
       $(document).ready(function() {
+
 
         $("#search")
           .focus(function() {
@@ -74,11 +62,12 @@
             }
             var alttag = trackData[i].title
             var streamurl = trackData[i].stream_url
+            var permaurl = trackData[i].permalink_url
             var client_id = "3c3aecf09c9a6e46e721f6118612ca59"
             var description = trackData[i].description
             var title = trackData[i].title
             if (artwork != null && streamurl != null) {
-              $('.media-grid').append('<li><a class="test" href="#" data-url="' + streamurl + '" onclick="swapPlayer(\'' + encodeURIComponent(streamurl) + '\',\'' + escape(title) + '\')"><img class="thumbnail" src="' + artwork + '"></a></li>');
+              $('.media-grid').append('<li><a class="test" href="#" data-url="' + streamurl + '" onclick="swapPlayer(\'' + encodeURIComponent(streamurl) + '\',\'' + escape(title) + '\')" data-content="And here\'s some amazing content. It\'s very engaging. right?"><img class="thumbnail" src="' + artwork + '"></a></li>');
             }
             var artwork = null
           }
@@ -91,22 +80,27 @@
         $(this).addClass('playing');
       })
 
-      function firePlayer() {
-        var player = $('audio').mediaelementplayer({
-          audioWidth: 350
-        })
-       
-      };
+      $('.media-grid a').live('hover', function(){
+        $(this).popover('show');
+      })
 
       function swapPlayer(url,title) {
-
           $('#player, .nowPlaying').remove();
-          $('.nav').append('<li class="active nowPlaying"><a href="#">' + unescape(title) + '</a></li>');
-          $('.nav').before('<audio id="player" src="' + decodeURIComponent(url) + '?client_id=3c3aecf09c9a6e46e721f6118612ca59" type="audio/mp3" preload="auto" controls="controls">');
+          $('.nav').append('<li class="nowPlaying"><a href="#">' + unescape(title) + '</a></li>');
+          $('.nav').before('<audio id="player" src="' + decodeURIComponent(url) + '?client_id=3c3aecf09c9a6e46e721f6118612ca59" type="audio/mp3" preload="auto" >');
           var audio_file1 = document.getElementById('player');
-audio_file1.play();       
+          audio_file1.play();     
         }
 
+      function swapPlayerNew(url) {   
+        $('.stratus-bottom').remove();   
+        $.stratus({
+          auto_play: true,
+          animate: false,
+          color: "000000",
+          links: [ { url: decodeURIComponent(url) } ]
+        });
+      }
       
 
     </script>
@@ -117,11 +111,15 @@ audio_file1.play();
     <div class="topbar">
       <div class="fill">
         <div class="container">
-          <a class="brand molot" href="#">Mixcastr</a>
+          <a class="brand molot" href="/">Mixcastr</a>
           <ul class="nav" style="float:right;"></ul>
+          <form class="pull-left" action="" style="display:none;">
+            <input type="text" name="q" placeholder="Search" value="<%= @query %>">
+          </form>
         </div>
       </div>
     </div>
+    
 
   <%= yield %>
 

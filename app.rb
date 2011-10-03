@@ -31,6 +31,10 @@ get '/auth' do
 	erb :auth
 end
 
+get '/map' do
+	erb :map
+end
+
 # get '/users' do
 #	@users = User.get(:order => [:id.desc ])
 #	erb :users
