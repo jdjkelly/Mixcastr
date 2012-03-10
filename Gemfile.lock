@@ -140,6 +140,5 @@ DEPENDENCIES
   rails-backbone
   sass-rails (~> 3.2.3)
   soundcloud
-  sqlite3
   twitter-bootstrap-rails
   uglifier (>= 1.0.3)
