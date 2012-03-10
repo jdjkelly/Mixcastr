@@ -1,0 +1,10 @@
+<ul class="thumbnails">
+  <% @tracks.each do |track| %>
+  <li class="span2">
+    <a href="<%= track.permalink_url %>" class="thumbnail stratus" >
+      <img src="<%= track.artwork_url ? track.artwork_url.gsub(/large/,'t300x300') : asset_path('default-art.png') %>" alt="<%= track.title %>">
+      <h4 draggable="true"><%= track.title %></h4>
+    </a>
+  </li>
+  <% end %>
+</ul>

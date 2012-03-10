@@ -1,0 +1,83 @@
+@import "twitter/bootstrap/bootstrap";
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+.navbar .brand {
+	font-family: Helvetica Neue;
+	font-weight:bold;
+}
+
+body {
+	font-family:Helvetica Neue;
+}
+
+
+.hero-unit {
+	background: none;
+	padding-bottom: 120px;
+	input[type="text"] {
+		padding: 10px;
+		font-size: 18px;
+	}
+	input[type="submit"] {
+		margin-bottom:10px;
+		height:41px;
+	}
+	h1 {
+		text-align:center;
+		font-size:58px;
+		font-weight:bold;
+		color:white;
+		text-shadow: 0px 1px 10px #333;
+		margin-bottom:40px;
+	}
+	form {
+		background: rgba(10, 10, 10, 0.2);
+		padding: 8px 0px 0px 8px;
+		border-radius: 6px;
+	}
+}
+
+.thumbnails {
+	margin-top:40px;
+	a {
+		position:relative;
+		text-decoration:none;
+		cursor: move;
+	}
+	h4 {
+		display:none;
+		position: absolute;
+		bottom: 4px;
+		width: 150px;
+		height: 155px;
+		padding: 5px 5px 0px 5px;
+		background: rgba(10, 10, 10, 0.6);
+		color: white;
+		overflow:hidden;
+	}
+}
+
+#stratus {
+	top: 40px !important;
+	background:whiteSmoke;
+	iframe {
+		margin:0 auto;
+		display:block;
+		width:85% !important;
+	}
+}
