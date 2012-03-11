@@ -6,6 +6,7 @@ gem 'rails', '3.2.0'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 gem 'pg'
+gem 'sqlite3'
 
 
 # Gems used only for assets and not required
@@ -21,7 +22,6 @@ group :assets do
 end
 
 gem 'jquery-rails'
-gem 'rails-backbone'
 gem 'twitter-bootstrap-rails'
 gem 'soundcloud'
 
