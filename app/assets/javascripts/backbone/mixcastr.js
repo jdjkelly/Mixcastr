@@ -93,6 +93,8 @@ window.SearchView = Backbone.View.extend({
   submit: function(e) {
     e.preventDefault();
     this.search($("#q").val());
+    $(this.el).children().fadeOut(500);
+    $("#progress").show();
   },
 
 	search: function(value) {
