@@ -12,21 +12,17 @@ var Router = Backbone.Router.extend({
 
     index: function(hash) {
     	var route = this;
-      	var search = new window.SearchView();
+      var search = new window.SearchView();
+      search.render();
 
-     	// Attach the tutorial to the DOM
-      	search.render();
-
-    	// Fix for hashes in pushState and hash fragment
-       	if (hash && !route._alreadyTriggered) {
-	       	// Reset to home, pushState support automatically converts hashes
-         	Backbone.history.navigate("", false);
-         	// Trigger the default browser behavior
-	      	location.hash = hash;
-			// Set an internal flag to stop recursive looping
-	        route._alreadyTriggered = true;
+      if (hash && !route._alreadyTriggered) {
+        // Reset to home, pushState support automatically converts hashes
+        Backbone.history.navigate("", false);
+        // Trigger the default browser behavior
+	      location.hash = hash;
+			  // Set an internal flag to stop recursive looping
+	      route._alreadyTriggered = true;
 	    }
-   		
   	},
 
   	tracks: function(q) {
@@ -35,8 +31,12 @@ var Router = Backbone.Router.extend({
     }
 });
 
-window.Track = Backbone.Model.extend({});
+// Model
+window.Track = Backbone.Model.extend({
+  
+});
 
+// Collection
 window.Tracks = Backbone.Collection.extend({
 	model: Track,
   url: "tracks.json"
@@ -50,7 +50,31 @@ window.TracksView = Backbone.View.extend({
 
   template: _.template($("#tracks").html()),
 
-	search: function(q) {
+
+	// search: function(q) {
+ //    TrackList.url = "tracks.json?q=" + q
+ //    TrackList.fetch();
+ //    alert(TrackList.length)
+ //    for (var i = 0; i < tracks.models.length; i++) {
+ //      var track = new TracksView({model: tracks.models[i]});
+ //      track.render();
+ //    };
+ //    // $.get('/tracks.json?q=' + q, function(data) {
+ //    //   for(var i in data) {
+ //    //     var track = TrackList.create({
+ //    //       permalink_url: data[i].permalink_url,
+ //    //       artwork_url: data[i].artwork_url,
+ //    //       title: data[i].title,
+ //    //     })
+
+ //    //     var tracks = new TracksView({model: track});
+ //    //     tracks.render();
+ //    //   }
+ //    // });
+   
+	// },
+
+  search: function(q) {
     $.get('/tracks.json?q=' + q, function(data) {
       for(var i in data) {
         var track = TrackList.create({
@@ -65,8 +89,7 @@ window.TracksView = Backbone.View.extend({
         
       }
     });
-   
-	},
+  },
 
 	render: function () {
     if ($(".thumbnails").length > 0) {
@@ -76,8 +99,34 @@ window.TracksView = Backbone.View.extend({
       $(this.el).html('<ul class="thumbnails"></ul>');
       $(".thumbnails").append(this.template(this.model.toJSON()));  
     }
-    bindTracks();
-	}
+    $("a.stratus").unbind();
+    $("a.stratus").bind("click", function(e) {
+      e.preventDefault();
+      $.postMessage($(this).attr("href"), "http://stratus.sc/player?align=top&animate=slide&auto_play=false&buying=true&color=491521&download=true&env=production&key=ybtyKcnlhP3RKXpJ58fg&links=http%3A%2F%2Fsoundcloud.com%2Fsalacioussound&random=false&redirect=http%3A%2F%2Fstratus.sc%2Fcallback.html&user=true&stats=true&volume=50&link=http%3A%2F%2Fmixcastr.com", $('#stratus iframe').get(0).contentWindow);
+      return false;
+    });
+    $(".thumbnails li a").hover(
+      function() {
+        $(this).children("img").css("opacity","0.8")
+        $(this).children("h4").fadeIn();
+      },
+      function() {
+        $(this).children("img").css("opacity","1")
+        $(this).children("h4").fadeOut();
+      }
+    );
+    $(".thumbnails li a").click(function() {
+      if (window.webkitNotifications.checkPermission() == 0) { // 0 is PERMISSION_ALLOWED
+      // function defined in step 2
+        var img = $(this).children("img").attr("src");
+        var title = $(this).children("h4").html();
+        createNotificationInstance(img,title,"Now playing");
+      } else {
+        window.webkitNotifications.requestPermission();
+      }
+    })
+  }
+
 });
 
 window.SearchView = Backbone.View.extend({
@@ -95,6 +144,7 @@ window.SearchView = Backbone.View.extend({
     this.search($("#q").val());
     $(this.el).children().fadeOut(500);
     $("#progress").show();
+    window.webkitNotifications.requestPermission();
   },
 
 	search: function(value) {

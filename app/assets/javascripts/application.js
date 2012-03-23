@@ -26,9 +26,10 @@ $(document).ready(function() {
 	$("body").stratus(
       {
         color: "491521",
-        align: "top",
+        align: "bottom",
         links: "http://soundcloud.com/salacioussound",
-        animate: false
+        animate: false,
+        theme: "http://mixcastr.com/assets/stratus.css"
       }
     );
 });
@@ -50,4 +51,9 @@ function bindTracks() {
 			$(this).children("h4").fadeOut();
 		}
 	);
+}
+
+function createNotificationInstance(image,title,content) {
+	return window.webkitNotifications.createNotification(
+        image, title, content).show().delay(1500).hide();
 }
