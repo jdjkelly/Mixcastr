@@ -27,7 +27,7 @@ $(document).ready(function() {
       {
         color: "491521",
         align: "bottom",
-        links: "http://soundcloud.com/salacioussound",
+        links: "http://soundcloud.com/torrotorro/clockwork-squad-up-torro-torro",
         animate: false,
         theme: "http://mixcastr.com/assets/stratus.css"
       }

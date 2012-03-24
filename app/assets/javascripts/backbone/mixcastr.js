@@ -142,8 +142,7 @@ window.SearchView = Backbone.View.extend({
   submit: function(e) {
     e.preventDefault();
     this.search($("#q").val());
-    $(this.el).children().fadeOut(500);
-    $("#progress").show();
+    $("h1").fadeOut(500);
     window.webkitNotifications.requestPermission();
   },
 
