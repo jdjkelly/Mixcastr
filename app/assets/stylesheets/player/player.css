@@ -1,0 +1,107 @@
+#stratus{font:11px "Lucida Grande","Lucida Sans",Arial,sans-serif;}
+#stratus #drawer,#stratus #player{background:#fff;border-style:solid}
+#stratus #drawer{border-width:1px 0 0 0}
+#stratus #player{border-width:1px 0 1px 0;}
+#stratus #player a{text-decoration:none}
+#stratus #player #controls span.toggle{-webkit-border-radius:20px;-moz-border-radius:20px;border-radius:20px;-webkit-transition:1s background;-moz-transition:1s background;transition:1s background}
+#stratus #player #controls span.play{background-position:0 -270px}
+#stratus #player #controls span.pause{background-position:-20px -270px}
+#stratus #player #controls span.prev{background-position:0 -290px}
+#stratus #player #controls span.next{background-position:-20px -290px}
+#stratus #player #controls span.prev,#stratus #player #controls span.next{opacity:.7;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);-webkit-transition:.5s opacity;-moz-transition:.5s opacity;transition:.5s opacity;}
+#stratus #player #controls span.prev:hover,#stratus #player #controls span.next:hover{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100)}
+#stratus #player #time{-webkit-transition:.5s background;-moz-transition:.5s background;transition:.5s background;}
+#stratus #player #time .loaded,#stratus #player #time .played{border-style:solid}
+#stratus #player #time .loaded{border-width:0 0 1px 0}
+#stratus #player #track,#stratus #player #share,#stratus #player #comment{border-style:solid;border-width:0 0 0 1px}
+#stratus #player #track a.title{font-weight:bold}
+#stratus #player ul#stats li{border-style:solid;border-width:0 1px 0 0;}
+#stratus #player ul#stats li:last-child{border:none}
+#stratus #player ul#stats li.plays span{background-position:0 -260px}
+#stratus #player ul#stats li.comments span{background-position:0 -240px}
+#stratus #player ul#stats li.favorites span{background-position:0 -250px}
+#stratus #player ul#buttons li{border-style:solid;border-width:0 0 0 1px;}
+#stratus #player ul#buttons li span,#stratus #player ul#buttons li a{opacity:.7;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);-webkit-transition:.5s opacity;-moz-transition:.5s opacity;transition:.5s opacity;}
+#stratus #player ul#buttons li span:hover,#stratus #player ul#buttons li a:hover{opacity:1;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100)}
+#stratus #player ul#buttons li.love span{background-position:0 -30px}
+#stratus #player ul#buttons li.loved span{background-position:30px -30px}
+#stratus #player ul#buttons li.download a{background-position:0 -60px}
+#stratus #player ul#buttons li.purchase a{background-position:0 -90px}
+#stratus #player ul#buttons li.soundcloud a{background-position:0 -150px}
+#stratus #player ul#buttons li.comment span{background-position:0 -180px}
+#stratus #player ul#buttons li.popup span{background-position:0 -210px}
+#stratus #player #share span.close,#stratus #player #comment span.close{background-position:0 -120px}
+#stratus #player #share{background-repeat:no-repeat;}
+#stratus #player #share ul#social a{background:url("/images/social.png")}
+#stratus #player #share ul#social a.facebook{background-position:0 0}
+#stratus #player #share ul#social a.twitter{background-position:-16px 0}
+#stratus #player #share ul#social a.google{background-position:-32px 0}
+#stratus #player #share ul#social a.email{background-position:-48px 0}
+#stratus #player #share ul#social a.tumblr{background-position:-64px 0}
+#stratus #player #share ul#social a.reddit{background-position:-80px 0}
+#stratus #player #share ul#social a.blogger{background-position:-96px 0}
+#stratus #player #share ul#social a.stumble{background-position:-112px 0}
+#stratus #player #share #embed input{border-style:solid;border-width:1px;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px}
+#stratus #player #comment #add input{background:transparent;border:none}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
+body{background:transparent}
+#stratus{width:100%;}
+#stratus #drawer,#stratus #player{display:none}
+#stratus #drawer{position:absolute;bottom:32px;left:0;height:166px;width:100%;}
+#stratus #drawer #artwork{position:absolute;top:0;left:0;padding:6px;height:154px;width:154px;}
+#stratus #drawer #artwork img{height:100%;width:100%}
+#stratus #drawer ul#tracks{display:block;height:166px;margin-left:166px;overflow-x:hidden;overflow-y:scroll;position:relative;}
+#stratus #drawer ul#tracks li{cursor:pointer;}
+#stratus #drawer ul#tracks li div{padding:10px 15px}
+#stratus #player{position:absolute;bottom:0;left:0;height:30px;width:100%;}
+#stratus #player *{outline:none}
+#stratus #player *:not(input){-webkit-user-select:none;-moz-user-select:none;user-select:none}
+#stratus #player #controls{position:absolute;top:0;left:0;padding:5px;}
+#stratus #player #controls > span{cursor:pointer;display:inline-block;float:left;text-indent:-3000px}
+#stratus #player #controls span.toggle{margin:0 4px;}
+#stratus #player #controls span.toggle,#stratus #player #controls span.toggle span{height:20px;width:20px}
+#stratus #player #controls span.toggle span{display:block;position:absolute}
+#stratus #player #controls span.toggle span.pause{display:none}
+#stratus #player #controls span.next,#stratus #player #controls span.prev{margin-top:4px;height:11px;width:11px}
+#stratus #player.playing #controls span.toggle span.play{display:none}
+#stratus #player.playing #controls span.toggle span.pause{display:block}
+#stratus #player #time{position:absolute;left:60px;((null)):0;cursor:pointer;margin-top:5px;overflow:hidden;width:180px;}
+#stratus #player #time,#stratus #player #time div{height:20px}
+#stratus #player #time div,#stratus #player #time canvas{position:absolute;width:0}
+#stratus #player #time .loaded{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+#stratus #player #time .waveform{height:40px;width:100%;}
+#stratus #player #time .waveform img{height:100%;width:100%}
+#stratus #player #time #waveform{height:40px;width:180px}
+#stratus #player #time .position{display:none;width:1px}
+#stratus #player.playing #time:hover .position{display:block}
+#stratus #player #track{position:absolute;left:250px;((null)):0;line-height:30px;padding:0 10px;z-index:10;}
+#stratus #player #track .user:after{content:" - "}
+#stratus #player #track .duration{padding-left:5px}
+#stratus #player ul#stats{float:right;padding-top:8px;position:relative;}
+#stratus #player ul#stats li{display:block;float:left;line-height:12px;margin-right:5px;padding-right:5px;}
+#stratus #player ul#stats li span{float:left;margin:2px 3px 0 0;height:10px;width:10px;text-indent:-3000px}
+#stratus #player #share,#stratus #player #comment{display:none;height:30px;margin:0 0 0 250px;position:relative;z-index:1000;}
+#stratus #player #share > *,#stratus #player #comment > *{position:absolute}
+#stratus #player #share span.close,#stratus #player #comment span.close{cursor:pointer;right:0;height:30px;width:30px;text-indent:-3000px}
+#stratus #player #share #embed{line-height:30px;right:30px;}
+#stratus #player #share #embed input{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;margin-left:5px;padding:2px;width:200px}
+#stratus #player #comment{height:30px;}
+#stratus #player #comment #avatar{position:absolute;left:5px;top:5px;height:20px;width:20px}
+#stratus #player #comment #add{position:absolute;left:30px;top:3px;}
+#stratus #player #comment #add input{padding:3px;width:300px}
+#stratus #player ul#buttons,#stratus #player ul#social{display:block;}
+#stratus #player ul#buttons li,#stratus #player ul#social li{float:left;}
+#stratus #player ul#buttons li,#stratus #player ul#social li,#stratus #player ul#buttons li > *,#stratus #player ul#social li > *{display:inline-block}
+#stratus #player ul#buttons li > *,#stratus #player ul#social li > *{text-indent:-3000px}
+#stratus #player ul#buttons{float:right;position:relative;}
+#stratus #player ul#buttons li,#stratus #player ul#buttons li > *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;height:30px;width:30px}
+#stratus #player ul#buttons li span{cursor:pointer}
+#stratus #player ul#buttons li:last-child{width:40px}
+#stratus #player ul#social{position:absolute;left:30px;top:7px;}
+#stratus #player ul#social li{margin-right:7px;}
+#stratus #player ul#social li a{height:16px;width:16px}

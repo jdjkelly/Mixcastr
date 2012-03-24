@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <title>Stratus 2</title>
+    <%= stylesheet_link_tag "player" %>
+    <%= stylesheet_link_tag "player/mixcastr" %>
+    <script src="http://connect.soundcloud.com/sdk.js"></script>
+    <%= javascript_include_tag "player" %>
+
+</head><body><!-- Stratus--><div id="stratus"><div id="drawer"><div id="artwork"><img/></div><ul id="tracks"></ul></div><div id="player"><div id="controls"><span class="prev">Previous</span><span class="toggle"><span class="play">Play</span><span class="pause">Pause</span></span><span class="next">Next</span></div><div id="time"><div class="played"></div><canvas id="waveform"></canvas><div class="loaded"></div><div class="position"></div></div><div id="track"></div><ul id="buttons"></ul><ul id="stats"></ul><div id="share"></div><div id="comment"><img id="avatar"/><div id="add"><input type="text" placeholder="Add your comment"/></div><span class="close commenting">Close</span></div></div></div><!-- Templates    --><script id='track' type='text/html'>
+  <div><strong>{{#user}}{{username}}{{/user}}&nbsp;-&nbsp;{{title}}</strong> {{timecode}}</div>
+</script>
+<script id='current' type='text/html'>
+  {{#user}}<a href='{{permalink_url}}' class='user' target='_blank'>{{username}}</a>{{/user}}
+  <a href='{{permalink_url}}' class='title' target='_blank'>{{title}}</a>
+  <span class='duration'>{{timecode}}</span>
+</script>
+<script id="buttons" type="text/html">
+  <li class='share'><span>Share</span></li>
+  <li class='button comment'><span>Comment</span></li>
+  <li class='button love'><span>Love</span></li>
+  {{#downloadable}}<li class='button download'><a href='{{permalink_url}}/download' target='_blank'>Download</a></li>{{/downloadable}}
+  {{#purchase_url}}<li class='button purchase'><a href='{{purchase_url}}' target='_blank'>Purchase</a></li>{{/purchase_url}}
+  <li class='button popup'><span>Popup</span></li>
+  <li class='soundcloud'><a href='http://stratus.sc' target='_blank'>Stratus</a></li>
+</script>
+<script id='stats' type='text/html'>
+  <li class='plays'><span>Plays</span> {{playback_count}}</li>
+  <li class='comments'><span>Comments</span> {{comment_count}}</li>
+  <li class='favorites'><span>Favoritings</span> {{favoritings_count}}</li>
+</script>
+<script id='share' type='text/html'>
+  <ul id='social'>
+    <li><a href='http://facebook.com/sharer.php?u={{permalink_url}}' class='facebook' target='_blank'>Facebook</a></li>
+    <li><a href='http://twitter.com/intent/tweet?url={{permalink_url}}' class='twitter' target='_blank'>Twitter</a></li>
+    <li><a href='https://m.google.com/app/plus/x/?v=compose&amp;content={{permalink_url}}' class='google' target='_blank'>Google+</a></li>
+    <li><a href='mailto:?subject={{title}}{{#user}} by {{username}}{{/user}}%20-%20SoundCloud&amp;body={{permalink_url}}' class='email'>Email</a></li>
+    <li><a href='http://www.tumblr.com/share/audio?externally_hosted_url={{permalink_url}}' class='tumblr' target='_blank'>Tumblr</a></li>
+    <li><a href='http://www.reddit.com/submit?url={{permalink_url}}' class='reddit' target='_blank'>Reddit</a></li>
+    <li><a href='http://www.blogger.com/blog-this.g?n={{title}}{{#user}} by {{username}}{{/user}}&amp;u={{permalink_url}}' class='blogger' target='_blank'>Blogger</a></li>
+    <li><a href='http://www.stumbleupon.com/submit?url={{permalink_url}}&amp;title=${share}' class='stumble' target='_blank'>StumbleUpon</a></li>
+  </ul>	
+  <div id='embed'>
+    Embed: <input type='text' value='&lt;iframe width=&quot;100%&quot; height=&quot;166&quot; scrolling=&quot;no&quot; src=&quot;http://w.soundcloud.com/player/?url=http%3A%2F%2Fapi.soundcloud.com%2Ftracks%2F{{id}}&amp;auto_play=false&amp;show_artwork=true&quot; frameborder=&quot;0&quot; &gt;&lt;/iframe&gt;'>
+  </div>
+  <span class='close sharing'>Close</span>
+</script>
+<script id='theme' type='text/html'>
+  <style>
+    {{#color}}
+      #stratus .toggle, #stratus .played{ background: {{ base }} !important; }
+      #stratus .toggle:hover{ background-color: {{ dark }} !important; }
+      #stratus .position{ background-color: {{ light }} !important; }
+      #stratus .loaded{ border-color: {{ light }} !important; }
+      #stratus #tracks li.current{ background-color: {{light }} !important; }
+    {{/color}}
+    {{#top}}
+      #stratus #player{ top: 0; }
+      #stratus #drawer{ top: 32px; border-width: 0 0 1px 0; }
+    {{/top}}
+    {{^user}}#stratus .user{ display: none !important; }{{/user}}	
+    {{^download}}#stratus .download{ display: none !important; }{{/download}}	
+    {{^buying}}#stratus .purchase{ display: none !important; }{{/buying}}	
+    {{^stats}}#stratus #stats{ display: none !important; }{{/stats}}
+    {{^redirect}}#stratus .love, #stratus .comment{ display: none !important; }{{/redirect}}
+  </style>
+</script>
+<!-- Google Analytics--><script type="text/javascript">var _gaq=_gaq||[];_gaq.push(["_setAccount","UA-29650954-1"]);_gaq.push(["_trackPageview"]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=true;a.src=("https:"==document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script></body></html>

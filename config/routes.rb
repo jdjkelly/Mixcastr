@@ -1,6 +1,7 @@
 Mixcastr::Application.routes.draw do
   resources :tracks
   resources :user
+  resources :player
   root :to => 'home#index'
 
   # The priority is based upon order of creation:
